@@ -1,13 +1,32 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 62.5%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.btn--answer {
+  font-family: "Inter";
+  height: 25.650205612182617px;
+  width: 69.92181396484375px;
+  max-width: 5rem;
+  border-radius: 7.942387104034424px;
+  font-size: 0.8rem;
+}
+
+.quiz {
+  min-height: 100vh;
+  padding-top: 3rem;
+  font-size: 1.6rem;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  text-align: center;
 }
