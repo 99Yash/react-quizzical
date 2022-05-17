@@ -5,18 +5,24 @@ import Quiz from "./Quiz";
 function App() {
   const [game, setGame] = useState(false);
   const [quizData, setQuizData] = useState([
-    // { question: "", incorrect_answers: [], correct_answer: "" },
+    { question: "", incorrect_answers: [], correct_answer: "" },
   ]); //? save the API in an empty array
   const options = [];
-  // quizData[incorrect_answers].forEach((ans) => options.push(ans));
+
+  //TODO add a way to display options
+
+  // quizData[5].forEach((ans) => options.push(ans));
   // options.push(quizData.correct_answer);
-  //!define outside any function
+  //?define outside any function
   const randomNum = Math.floor(Math.random() * quizData.length); //?generate a random number from the API array
-  // const randomQues = quizData[randomNum].question; //!there was some problem here...(in dot question)
+
+  const randomQues = quizData[randomNum].question; //!there was some problem here...(in dot question)
+  console.log(quizData);
   // const option = quizData[randomNum].correct_answer;
   const startGame = () => {
     setGame(true);
   };
+  console.log(randomNum);
 
   // console.log(option);
   //?API Call using Fetch API. have to use useEffect
@@ -48,7 +54,7 @@ function App() {
       ) : (
         <Quiz
           data={JSON.stringify(quizData, null, 2)}
-          // question={randomQues}
+          question={randomQues}
           // options={options}
         />
       )}
