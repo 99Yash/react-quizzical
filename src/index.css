@@ -16,10 +16,11 @@ code {
 .btn--answer {
   font-family: "Inter";
   height: 25.650205612182617px;
-  width: 69.92181396484375px;
-  max-width: 5rem;
+  min-width: 89.92181396484375px;
+  width: fit-content;
   border-radius: 7.942387104034424px;
   font-size: 0.8rem;
+  margin-right: 0.6rem;
 }
 
 .quiz {
