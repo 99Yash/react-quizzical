@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Quiz from "./Quiz";
+import Buttons from "./Buttons";
 
 function App() {
   const [game, setGame] = useState(false);
@@ -9,12 +9,12 @@ function App() {
   ]); //? save the API in empty array
   let options = [];
 
-  //TODO :-- a way to display without hard-coding
+  //TODO :-- a way to display questions dynamically
 
   console.log(quizData[0]);
   //?define outside any function
   const randomNum = Math.floor(Math.random() * quizData.length); //?generate a random number from the API array
-  options.push(quizData[randomNum].incorrect_answers); //!concat issue
+  options.push(quizData[randomNum].incorrect_answers); //!concat issue. options[0] is an array now
   options.push(quizData[randomNum].correct_answer);
 
   //? shuffle options
@@ -27,7 +27,7 @@ function App() {
   // shuffleArray(options);
   // let [a, b, c] = options[0];
   // let [e, f, g] = a;
-  options = [...options[0], options[1]];
+  options = [...options[0], options[1]]; //* now options is an array of 4
   shuffleArray(options);
 
   const randomQues = quizData[randomNum].question; //!there was some problem here...(in dot question)
@@ -39,7 +39,7 @@ function App() {
     setGame(true);
   };
 
-  //?API Call using Fetch API. have to use useEffect
+  //?API Call using Fetch API. Have to use useEffect
   useEffect(() => {
     fetch(
       "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple"
@@ -63,14 +63,15 @@ function App() {
   //     options={options}
   //   />
   // ));
-
-  let qnArr = [];
-  const questionArray = () => {
-    const n = Math.floor(Math.random() * quizData.length);
+  // [a, b, c, d, e, f, g, h, i, j] = quizData;
+  // const { question, ...rest } = dataObj;
+  // qnArr = dataObj.forEach((obj) => obj.question);
+  const dataArray = () => {
+    let qnArr = [];
     for (let i = 0; i < quizData.length; i++) {
-      qnArr = quizData[i].question;
-      options.concat(quizData[i].incorrect_answers);
-      options.push(quizData[i].correct_answer);
+      qnArr = quizData[randomNum].question;
+      options.concat(quizData[randomNum].incorrect_answers);
+      options.push(quizData[randomNum].correct_answer);
     }
   };
 
@@ -85,13 +86,14 @@ function App() {
           </button>
         </header>
       ) : (
-        <div className="App">
+        <div className="App-start">
           <Quiz
             // key={Math.random().toString()}
+            dataArray={dataArray()}
             data={quizData}
             question={randomQues}
-            options={options}
           />
+          <Buttons options={options} />
         </div>
       )}
       {/* <button type="submit">SUBMIT</button> */}
