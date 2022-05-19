@@ -19,12 +19,14 @@ code {
   min-width: 89.92181396484375px;
   width: fit-content;
   border-radius: 7.942387104034424px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   margin-right: 0.6rem;
+  padding: 0 10px;
 }
 
 .quiz {
-  min-height: 100vh;
+  min-height: 20vh;
   padding-top: 3rem;
   font-size: 1.6rem;
   font-family: "Karla", sans-serif;

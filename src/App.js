@@ -6,26 +6,39 @@ function App() {
   const [game, setGame] = useState(false);
   const [quizData, setQuizData] = useState([
     { question: "", incorrect_answers: [], correct_answer: "" },
-  ]); //? save the API in an empty array
+  ]); //? save the API in empty array
   let options = [];
 
-  //TODO :-- a way to display options. options are being displayed from a different index
+  //TODO :-- a way to display without hard-coding
 
-  console.log(quizData[0][3]);
+  console.log(quizData[0]);
   //?define outside any function
   const randomNum = Math.floor(Math.random() * quizData.length); //?generate a random number from the API array
-  options.push(quizData[randomNum].incorrect_answers);
+  options.push(quizData[randomNum].incorrect_answers); //!concat issue
   options.push(quizData[randomNum].correct_answer);
 
+  //? shuffle options
+  const shuffleArray = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  };
+  // shuffleArray(options);
+  // let [a, b, c] = options[0];
+  // let [e, f, g] = a;
+  options = [...options[0], options[1]];
+  shuffleArray(options);
+
   const randomQues = quizData[randomNum].question; //!there was some problem here...(in dot question)
+
   console.log(options);
   console.log(quizData);
-  // const option = quizData[randomNum].correct_answer;
+
   const startGame = () => {
     setGame(true);
   };
 
-  // console.log(option);
   //?API Call using Fetch API. have to use useEffect
   useEffect(() => {
     fetch(
@@ -42,6 +55,25 @@ function App() {
   //   .then((res) => res.json())
   //   .then((data) => setQuizData(data));//? every time the component renders it will re render the component, causing this infinite loop
 
+  // const questionArr = quizData.map((q) => (
+  //   <Quiz
+  //     key={Math.random().toString()}
+  //     data={JSON.stringify(quizData, null, 2)}
+  //     question={randomQues}
+  //     options={options}
+  //   />
+  // ));
+
+  let qnArr = [];
+  const questionArray = () => {
+    const n = Math.floor(Math.random() * quizData.length);
+    for (let i = 0; i < quizData.length; i++) {
+      qnArr = quizData[i].question;
+      options.concat(quizData[i].incorrect_answers);
+      options.push(quizData[i].correct_answer);
+    }
+  };
+
   return (
     <div className="App">
       {!game ? (
@@ -53,12 +85,16 @@ function App() {
           </button>
         </header>
       ) : (
-        <Quiz
-          // data={JSON.stringify(quizData, null, 2)}
-          question={randomQues}
-          options={options}
-        />
+        <div className="App">
+          <Quiz
+            // key={Math.random().toString()}
+            data={quizData}
+            question={randomQues}
+            options={options}
+          />
+        </div>
       )}
+      {/* <button type="submit">SUBMIT</button> */}
     </div>
   );
 }
